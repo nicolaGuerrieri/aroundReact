@@ -11,22 +11,31 @@ import { StackNavigator } from 'react-navigation';
 
 class around extends Component {
   static navigationOptions = {
-    title: 'Home Screen',
+    title: 'AroundTheWOD App',
+    headerTitleStyle: {
+      /*  */
+    },
+    headerStyle: {
+      
+    },
+    headerTintColor: {
+      /*  */
+    },
   };
 
-  render(){
+  render() {
     const { navigation } = this.props;
 
     return (
-           <App navigation={ navigation }/>
+      <App navigation={navigation} />
     );
   }
 }
 const SimpleApp = StackNavigator({
-    Home: { screen: around },
-    Search: { screen: Search, title: 'ss' },
-  });
-AppRegistry.registerComponent('around', () => App);
+  Home: { screen: around },
+  Search: { screen: Search, title: 'ss' },
+});
+AppRegistry.registerComponent('around', () => SimpleApp);
 
 
 /**<View style={styles.container}>

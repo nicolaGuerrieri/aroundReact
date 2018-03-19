@@ -24,17 +24,12 @@ type Props = {};
 export default class App extends Component<Props> {
   constructor(props) {
     super(props);
-    this.state = { city: 'Search city...' };
+    this.state = { city: this.props.navigation.state.params.city};
   }
   render() {
     return (
       <View style={styles.container}>
-        
-        <Text style={styles.welcome}>
-          Welcome in AroundTheWOD App !!!
-        </Text>
-        
-      
+        <Text style={styles.welcome}>{this.state.city}</Text>     
       </View>
     );
   }
