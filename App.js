@@ -6,15 +6,14 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   Platform,
   StyleSheet,
   Text,
   TextInput,
   Image,
   Button,
-  View, 
-} from 'react-native';
+  View,
+ } from 'react-native';
 import {
   StackNavigator,
 } from 'react-navigation';
@@ -26,26 +25,19 @@ const instructions = Platform.select({
 
 
 
- 
-export default class App extends React.Component  {
-  //navigazione
-  static navigationOptions =
-    {
-      title: 'App',
-    };
 
+type Props = {};
+export default class App extends Component<Props> {
   
+
   constructor(props) {
     super(props);
     this.state = { city: 'Search city...' };
-    
-  }
-  FunctionToOpenSecondActivity = () => {
-   this.props.navigation.navigate('Search');
-
+    this.props = props;
   }
   render() {
-    return (
+    const { navigate } = this.props.navigation;
+     return (
       <View style={styles.container}>
         <Image
           style={styles.imageHome}
@@ -74,7 +66,7 @@ export default class App extends React.Component  {
           color="#3589d8"
           width="200"
           style={styles.button}
-          onPress={this.FunctionToOpenSecondActivity}
+          onPress={() => navigate('Search')}
           accessibilityLabel="Search"
         />
 

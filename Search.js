@@ -12,11 +12,8 @@ import {
   TextInput,
   Image,
   Button,
-  View
-} from 'react-native';
-import {
-  StackNavigator,
-} from 'react-navigation';
+  View,
+ } from 'react-native';
 
 const instructions = Platform.select({
   ios: 'Search a place',
@@ -30,22 +27,59 @@ export default class App extends Component<Props> {
     this.state = { city: 'Search city...' };
   }
   render() {
-
     return (
       <View style={styles.container}>
-       
-        <View
-          style={{
-            borderBottomColor: 'black',
-            borderBottomWidth: 1,
-            height: 10,
-          }}
-        />
         
-
+        <Text style={styles.welcome}>
+          Welcome in AroundTheWOD App !!!
+        </Text>
+        
       
       </View>
     );
   }
 }
- 
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#336799',
+
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+    color: 'white',
+  },
+  instructions: {
+    textAlign: 'center',
+    marginBottom: 5,
+    color: 'white',
+  },
+  imageHome: {
+    width: 150,
+    height: 150,
+  },
+  inputRound: { 
+    textAlign: 'center',
+    color: 'white',
+    width: 300,
+    height: 40,
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius:10,
+  },
+  button: { 
+    textAlign: 'center',
+    color: '#3589d8',
+    width: 400,
+    height: 40,
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius:20,
+  },
+  
+});
