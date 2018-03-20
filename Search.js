@@ -11,9 +11,16 @@ import {
   Text,
   TextInput,
   Image,
-  Button,
   View,
- } from 'react-native';
+  ScrollView,
+  FlatList,
+  ActivityIndicator
+} from 'react-native';
+import { Card, ListItem, Button } from 'react-native-elements'
+
+
+
+
 
 const instructions = Platform.select({
   ios: 'Search a place',
@@ -22,19 +29,59 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
+
   constructor(props) {
     super(props);
-    this.state = { city: this.props.navigation.state.params.city};
+
+    this.state = { city: this.props.navigation.state.params.city };
+    this.state = { isLoading: true };
+    this.state = {
+      dataSource: null,
+    };
+    this.getPlaceFromCity();
+  }
+  getPlaceFromCity() {
+    if (this.props.navigation.state.params.city) {
+      return fetch('http://45.62.253.187:3000/getListaForCity?citta=' + this.props.navigation.state.params.city)
+        .then((response) => response.json())
+        .then((responseJson) => {
+
+          console.log(responseJson.listaLuoghi);
+          this.setState({
+            isLoading: false,
+            dataSource: responseJson.listaLuoghi,
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+          console.error(">>>>>>>>>>>>>>>>");
+        });
+    }
   }
   render() {
+
+    if (this.state.isLoading) {
+      return (
+        <View style={{ flex: 1, padding: 20 }}>
+          <ActivityIndicator />
+        </View>
+      )
+    }
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>{this.state.city}</Text>     
-      </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.welcome}>{this.state.city}</Text>
+          <FlatList
+              data={this.state.dataSource}
+              renderItem={({item}) => <Text>{item.ricerca}</Text>}
+            />
+        </View>
+      </ScrollView>
     );
   }
-}
 
+}
+ 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -44,37 +91,41 @@ const styles = StyleSheet.create({
 
   },
   welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    color: 'white',
+    color: '#ffffff',
   },
-  instructions: {
-    textAlign: 'center',
-    marginBottom: 5,
-    color: 'white',
-  },
-  imageHome: {
-    width: 150,
-    height: 150,
-  },
-  inputRound: { 
-    textAlign: 'center',
-    color: 'white',
-    width: 300,
-    height: 40,
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius:10,
-  },
-  button: { 
-    textAlign: 'center',
-    color: '#3589d8',
-    width: 400,
-    height: 40,
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius:20,
-  },
-  
+ 
+
 });
+
+/** this.state.listaLuoghi.map((u, i) => {
+                return (
+                  <View key={i} style={styles.user}>
+                    
+                    <Text style={styles.name}>{u.ricerca}</Text>
+                  </View>
+                );
+              })
+ * import {
+  Card,
+  CardImage,
+  CardTitle,
+  CardContent,
+  CardAction
+} from 'react-native-card-view';
+
+ * <Card styles={card}>
+          <CardTitle styles={cardTitle}>
+            <Text style={styles.title}>Card Title</Text>
+          </CardTitle>
+          <CardContent>
+            <Text>Content</Text>
+          </CardContent>
+          <CardAction >
+          <Button
+            title="Detail"
+            style={styles.button}
+            onPress={() => {}}>
+            Detail
+          </Button>
+          </CardAction>
+        </Card> */

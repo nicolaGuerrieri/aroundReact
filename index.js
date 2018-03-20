@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 import App from './App';
 import Search from './Search'
+import GoogleSearchAutoComplete from './GoogleSearchAutoComplete'
 
 
 
@@ -10,67 +11,61 @@ import Search from './Search'
 import { StackNavigator } from 'react-navigation';
 
 class around extends Component {
+  
   static navigationOptions = {
-    title: 'AroundTheWOD App',
-    headerTitleStyle: {
-      /*  */
-    },
-    headerStyle: {
-      
-    },
-    headerTintColor: {
-      /*  */
-    },
+    header: null
+}
+ 
+  render() {
+    const { navigation } = this.props;
+
+    return (
+      <App navigation={navigation } >
+
+      </App> 
+    );
+  }
+}
+class Second extends Component {
+  static navigationOptions = { 
+    
+    headerStyle: { backgroundColor: '#336799' },
+    headerTitleStyle: { color: 'white'}
+ 
+
   };
 
   render() {
     const { navigation } = this.props;
 
     return (
-      <App navigation={navigation} />
+      <Search navigation={navigation } >
+
+      </Search> 
     );
   }
 }
-const SimpleApp = StackNavigator({
-  Home: { screen: around },
-  Search: { screen: Search, title: 'ss' },
+class Autoc extends Component {
+  static navigationOptions = { 
+    
+    headerStyle: { backgroundColor: '#336799' },
+    headerTitleStyle: { color: 'white'}
+ 
+  };
+
+  render() {
+    const { navigation } = this.props;
+
+    return (
+      <Search navigation={navigation } >
+
+      </Search> 
+    );
+  }
+}
+const NAVIGAZIONE = StackNavigator({
+  Home: { screen: around},
+  Search: { screen: Second },
+  GoogleSearchAutoComplete: { screen: Autoc},
 });
-AppRegistry.registerComponent('around', () => SimpleApp);
-
-
-/**<View style={styles.container}>
-        <Image
-          style={styles.imageHome}
-          source={require('./icon.png')} />
-        <Text style={styles.welcome}>
-          Welcome in AroundTheWOD App !!!
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-        <TextInput
-          style={styles.inputRound} placeholder="prova" placeholderTextColor="white"
-          onChangeText={(city) => this.setState({ city })}
-          underlineColorAndroid='transparent'
-          value={this.state.text}
-        />
-        <View
-          style={{
-            borderBottomColor: 'black',
-            borderBottomWidth: 1,
-            height: 10,
-          }}
-        />
-        <Button
-          title="Search"
-          color="#3589d8"
-          width="200"
-          style={styles.button}
-          onPress={() =>
-            navigate('Search', { name: text })
-          }
-          accessibilityLabel="Search"
-        />
-
-
-      </View> */
+AppRegistry.registerComponent('around', () => NAVIGAZIONE);

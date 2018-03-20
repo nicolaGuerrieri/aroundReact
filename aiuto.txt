@@ -1,0 +1,5 @@
+Material design
+http://react-native-material-design.github.io/installation
+
+mappa
+https://github.com/react-community/react-native-maps/blob/master/docs/installation.md
